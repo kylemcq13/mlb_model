@@ -1,10 +1,6 @@
 import flask
 import pandas as pd
 from flask import request
-from configparser import ConfigParser
-from sqlalchemy import create_engine
-from pw import conn_string
-import sys
 
 app = flask.Flask(__name__, template_folder='html_templates')
 
@@ -37,10 +33,10 @@ def main():
                                     bp_reco_df)
         pitcher_name = []
         matchup_score = []
-        
+
         for i in range(len(result_final)):
-            pitcher_name.append(result_final.iloc[i][2])
-            matchup_score.append(result_final.iloc[i][3])
+            pitcher_name.append(result_final.iloc[i][3])
+            matchup_score.append(result_final.iloc[i][4])
 
         return (flask.render_template(
                                  'positive.html', 
