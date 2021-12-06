@@ -1,9 +1,11 @@
 import flask
 import pandas as pd
-from model.model import InputForm
 from flask import request
 from configparser import ConfigParser
 from sqlalchemy import create_engine
+import sys
+
+print(sys.version)
 
 
 
