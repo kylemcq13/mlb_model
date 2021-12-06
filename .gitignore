@@ -130,3 +130,6 @@ dmypy.json
 
 # nb.ini
 *.ini
+
+# pw.py
+pw.py
