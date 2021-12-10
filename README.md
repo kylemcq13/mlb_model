@@ -41,4 +41,4 @@ bp_reco('Moncada, Yoan', 'DET', bp_reco_df)
 ```
 Below would be the recommendations.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/yoyo_results.PNG" alt="Yoyo vs Tigers result" width="500" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/yoyo_results.PNG" alt="Yoyo vs Tigers result" width="300" height="100">
