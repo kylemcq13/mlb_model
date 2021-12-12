@@ -13,16 +13,18 @@ A postgresql database was set up locally to store the data. Three python scripts
 The main driver of the bullpen matchup model is the Statcast data which includes pitch by pitch statistics like velocity of the pitch, it's location, and even finer details such as spin axis and exit velocity off the bat. The statcast data collected includes all pitches from the 2016-2021 seasons. The advanced pitching and hitting statistics tables are collected weekly and include advanced stats such as wOBA and ISO at that particular point in the season. 
 
 <img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/bp_matchup_arch.PNG" alt="High Level Data Arch." width="500" height="700">
+* Fig. 1 - High Level Dataflow
 
 ## Cluster Modeling
 
 The first piece of the model clusters pitches based on the following variables: release speed, spin axis, spin rate, pitch location, horizontal movement, and vertical movement. Pitches were bucketed based on pitcher handedness and pitch type and then clustered using Kmeans clusters. Using the elbow method, optimal k was chosen for clustering of each bucket. 
 
 <img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/clusters_pca.png alt="Clusters in PCA" width="500" height="700">
+* Fig. 2 - KMeans Cluster visualization in 2 dimensional space via PCA
 
 ## Hitting Quality Model
 
-A Random Forest Regressor that uses exit velocity and launch angle to predict change in run expectancy value. The output of this model rewards high quality contact as defined by exit velocity and launch angle. 
+To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle was trained to predict change in run expectancy value. The predicted scores were then used for a matchup score.
 
 ## Matchup Score
 

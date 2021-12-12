@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from sklearn.model_selection import GridSearchCV
 
 
 # establish sql engine connection
@@ -30,8 +31,11 @@ non_bip['e_delta_re'] = non_bip.groupby('description')['delta_run_exp'].transfor
 # ball in play outcomes
 bip = df.loc[df['description']=='hit_into_play']
 
+# sample 10k records for training set
+bip_10k = bip.sample(n=10000, random_state=1)
+
 # split the data
-X, y = bip[['launch_speed', 'launch_angle']], bip['delta_run_exp']
+X, y = bip_10k[['launch_speed', 'launch_angle']], bip_10k['delta_run_exp']
 
 # create train and test sets
 X_train, X_test, y_train, y_test = train_test_split(
@@ -42,18 +46,18 @@ X_train, X_test, y_train, y_test = train_test_split(
 rf_reg = Pipeline(steps=[('scaler', StandardScaler()),
                         ('regressor', RandomForestRegressor())])
 
-# set hyperparameter grid for tuning
+param_dist = { 
+          'regressor__n_estimators': [100, 200, 500],
+          'regressor__max_depth':[None, 5, 8]
+}
 
-criterion = ['mse', 'mae']
-splitter = ['best', 'random']
+# Hyperparameter tuning
+search = GridSearchCV(rf_reg, 
+param_dist, n_jobs=-1, scoring='neg_root_mean_squared_error')
+search.fit(X_train, y_train)
+search.best_params_
 
-params = dict(regressor__criterion = criterion,
-              regressor__splitter = splitter)
-
-# fit the model
-rf_reg.fit(X_train, y_train)
-
-y_pred = rf_reg.predict(X_test)
+y_pred = search.best_estimator_.predict(X_test)
 
 # error scores
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
@@ -66,7 +70,7 @@ mae = mean_absolute_error(y_test, y_pred)
 print('mae: ', mae)
 
 # predict change in run expectancy with launch_speed and angle
-bip['e_delta_re'] = rf_reg.predict(bip[['launch_speed','launch_angle']])
+bip['e_delta_re'] = search.best_estimator_.predict(bip[['launch_speed','launch_angle']])
 
 # fill in dataframe with ball in play and non ball in play
 frames = [bip, non_bip]
