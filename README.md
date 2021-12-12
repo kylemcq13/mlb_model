@@ -26,6 +26,9 @@ The first piece of the model clusters pitches based on the following variables: 
 
 To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle was trained to predict change in run expectancy value. The predicted scores were then used for a matchup score.
 
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/training_dist.png alt="Clusters in PCA" width="500" height="700">
+
+
 ## Matchup Score
 
 The matchup score combines the clustering data with the change in run expectancy data by multiplying the subset of pitches by the change in run expectancy score. For example, if a particular batter has a run expectancy score of 1 for Cluster 1, 2 for Cluster 2 and -3 for Cluster 3 and an opposing pitcher throws 20% of his pitches from Cluster 1, 50% from Cluster 2 and 30% from Cluster 3 then:
