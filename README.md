@@ -27,6 +27,10 @@ The first piece of the model clusters pitches based on the following variables: 
 To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle was trained to predict change in run expectancy value. The predicted scores were then used for a matchup score.
 
 <img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Clusters in PCA" width="700" height="500">
+* Fig. 3 - Statcast Outcome Variable Distribution
+
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/feature_imp.PNG alt="Clusters in PCA" width="700" height="500">
+* Fig. 3 - Feature Importance
 
 
 ## Matchup Score
