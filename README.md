@@ -18,7 +18,7 @@ The main driver of the bullpen matchup model is the Statcast data which includes
 
 The first piece of the model clusters pitches based on the following variables: release speed, spin axis, spin rate, pitch location, horizontal movement, and vertical movement. Pitches were bucketed based on pitcher handedness and pitch type and then clustered using Kmeans clusters. Using the elbow method, optimal k was chosen for clustering of each bucket. 
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/clusters_pca.PNG" alt="Clusters in PCA" width="500" height="700">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/clusters_pca.png alt="Clusters in PCA" width="500" height="700">
 
 ## Hitting Quality Model
 
