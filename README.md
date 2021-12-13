@@ -19,17 +19,17 @@ The main driver of the bullpen matchup model is the Statcast data which includes
 
 The first piece of the model clusters pitches based on the following variables: release speed, spin axis, spin rate, pitch location, horizontal movement, and vertical movement. Pitches were bucketed based on pitcher handedness and pitch type and then clustered using Kmeans clusters. Using the elbow method, optimal k was chosen for clustering of each bucket. 
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/clusters_pca.png alt="Clusters in PCA" width="500" height="700">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/clusters_pca.png alt="Clusters in PCA" width="700" height="850">
 * Fig. 2 - KMeans Cluster visualization in 2 dimensional space via PCA
 
 ## Hitting Quality Model
 
 To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle was trained to predict change in run expectancy value. The predicted scores were then used for a matchup score.
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Clusters in PCA" width="700" height="500">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="700" height="500">
 * Fig. 3 - Statcast Outcome Variable Distribution
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/readme-001/Sandbox/feature_imp.PNG alt="Clusters in PCA" width="400" height="250">
+<img src=https://github.com/kylemcq13/mlb_model/blob/readme-001/Sandbox/feature_imp.PNG alt="Feature Importance" width="400" height="250">
 * Fig. 3 - Feature Importance
 
 
