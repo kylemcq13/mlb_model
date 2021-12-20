@@ -29,7 +29,7 @@ To provide context for quality contact, a Random Forest Regressor that uses exit
 <img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="400" height="300">
 * Fig. 3 - Statcast Outcome Variable Distribution
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/readme-001/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
+<img src=https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
 * Fig. 4 - Feature Importance
 
 
