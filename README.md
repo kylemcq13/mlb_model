@@ -26,7 +26,7 @@ The first piece of the model clusters pitches based on the following variables: 
 
 To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle was trained to predict change in run expectancy value. The predicted scores were then used for a matchup score.
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="700" height="500">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="400" height="300">
 * Fig. 3 - Statcast Outcome Variable Distribution
 
 <img src=https://github.com/kylemcq13/mlb_model/blob/readme-001/Sandbox/feature_imp.PNG alt="Feature Importance" width="400" height="250">
