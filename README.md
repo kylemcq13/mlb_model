@@ -30,7 +30,7 @@ To provide context for quality contact, a Random Forest Regressor that uses exit
 * Fig. 3 - Statcast Outcome Variable Distribution
 
 <img src=https://github.com/kylemcq13/mlb_model/blob/readme-001/Sandbox/feature_imp.PNG alt="Feature Importance" width="400" height="250">
-* Fig. 3 - Feature Importance
+* Fig. 4 - Feature Importance
 
 
 ## Matchup Score
