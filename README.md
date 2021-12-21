@@ -40,13 +40,13 @@ Clusters are defined as:
 
 To provide context for quality contact, a Random Forest Regressor that uses exit velocity and launch angle features was trained to predict change in run expectancy value. The training data is randomly samples from Statcast data collected in the 2016-2020 seasons. The trained model is then used to predict change in run expectancy for the 2021 season. The predicted scores from this model are a key part to the matchup score. By exploring the relationship of contact quality and change in run expectancy, we can quantify a hitter's contact quality at the pitch by pitch granularity. 
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="400" height="300">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="400" height="400">
 * Fig. 3 - Statcast Outcome Variable Distribution
 
 Above you'll find the distribution of the outcome variable. Delta run expectancy is calculated by taking the difference in run expectancy between the beginning of the at bat and the end. 
 
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
+<img src=https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/feature_imp2.PNG alt="Feature Importance" width="600" height="250">
 * Fig. 4 - Random Forest Regressor Feature Importance
 
 ## Matchup Score
