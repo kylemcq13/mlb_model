@@ -25,7 +25,7 @@ The first piece of the model clusters pitches based on the following variables: 
 Clusters are defined as:
 
 - lhp_cukc = left handed knucklecurve/curveball
-- lhp_ff = left headed fastballs
+- lhp_ff = left handed fastballs
 - lhp_off = left handed offspeed (change ups)
 - lhp_slct = left handed sliders/cutter
 - lhp_mf = left handed two seam fastball/sinker
