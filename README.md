@@ -24,16 +24,16 @@ The first piece of the model clusters pitches based on the following variables: 
 
 Clusters are defined as:
 
-lhp_cukc = left handed knucklecurve/curveball
-lhp_ff = left headed fastballs
-lhp_off = left handed offspeed (change ups)
-lhp_slct = left handed sliders/cutter
-lhp_mf = left handed two seam fastball/sinker
-rhp_cukc = right handed knucklecurve/curveball
-rhp_ff = right headed fastballs
-rhp_off = right handed offspeed (change ups)
-rhp_slct = right handed sliders/cutter
-rhp_mf = right handed two seam fastball/sinker
+- lhp_cukc = left handed knucklecurve/curveball
+- lhp_ff = left headed fastballs
+- lhp_off = left handed offspeed (change ups)
+- lhp_slct = left handed sliders/cutter
+- lhp_mf = left handed two seam fastball/sinker
+- rhp_cukc = right handed knucklecurve/curveball
+- rhp_ff = right headed fastballs
+- rhp_off = right handed offspeed (change ups)
+- rhp_slct = right handed sliders/cutter
+- rhp_mf = right handed two seam fastball/sinker
 
 
 ## Hitting Quality Model
@@ -63,9 +63,9 @@ Let's say the Detroit Tigers wanted bullpen matchup recommendations when facing 
 
 Below would be the recommendations.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/yoyo_rec_results.PNG" alt="Yoyo vs Tigers result" width="400" height="200">
+<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/yoyo_rec_results.PNG" alt="Yoyo vs Tigers result" width="400" height="200">
 
 See below, Yoan Moncada's stats against the recommended pitchers according to Baseball Savant.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/baseball_savant_yoyo.PNG" alt="Yoyo vs Tigers baseball savant" width="500" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/baseball_savant_yoyo.PNG" alt="Yoyo vs Tigers baseball savant" width="500" height="300">
 
