@@ -43,11 +43,8 @@ To provide context for quality contact, a Random Forest Regressor that uses exit
 <img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/statcast_dist.PNG alt="Outcome variable distribution" width="500" height="400">
 * Fig. 3 - Statcast Outcome Variable Distribution
 
+
 Above you'll find the distribution of the outcome variable. Delta run expectancy is calculated by taking the difference in run expectancy between the beginning of the at bat and the end. 
-
-
-<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
-* Fig. 4 - Random Forest Regressor Feature Importance
 
 ## Matchup Score
 
