@@ -67,5 +67,5 @@ Below would be the recommendations.
 
 See below, Yoan Moncada's stats against the recommended pitchers according to Baseball Savant.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/yoyo_rec_results.PNG" alt="Yoyo vs Tigers baseball savant" width="1000" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/baseball_savant_yoyo.PNG" alt="Yoyo vs Tigers baseball savant" width="1000" height="300">
 
