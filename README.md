@@ -46,7 +46,7 @@ To provide context for quality contact, a Random Forest Regressor that uses exit
 Above you'll find the distribution of the outcome variable. Delta run expectancy is calculated by taking the difference in run expectancy between the beginning of the at bat and the end. 
 
 
-<img src=https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
+<img src=https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/feature_imp2.PNG alt="Feature Importance" width="400" height="250">
 * Fig. 4 - Random Forest Regressor Feature Importance
 
 ## Matchup Score
@@ -63,9 +63,9 @@ Let's say the Detroit Tigers wanted bullpen matchup recommendations when facing 
 
 Below would be the recommendations.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/yoyo_rec_results.PNG" alt="Yoyo vs Tigers result" width="400" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/yoyo_rec_results.PNG" alt="Yoyo vs Tigers result" width="400" height="300">
 
 See below, Yoan Moncada's stats against the recommended pitchers according to Baseball Savant.
 
-<img src="https://github.com/kylemcq13/mlb_model/blob/run_exp_model-001/Sandbox/baseball_savant_yoyo.PNG" alt="Yoyo vs Tigers baseball savant" width="1000" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/baseball_savant_yoyo.PNG" alt="Yoyo vs Tigers baseball savant" width="1000" height="300">
 
