@@ -30,7 +30,7 @@ Clusters are defined as:
 - lhp_slct = left handed sliders/cutter
 - lhp_mf = left handed two seam fastball/sinker
 - rhp_cukc = right handed knucklecurve/curveball
-- rhp_ff = right headed fastballs
+- rhp_ff = right handed fastballs
 - rhp_off = right handed offspeed (change ups)
 - rhp_slct = right handed sliders/cutter
 - rhp_mf = right handed two seam fastball/sinker
