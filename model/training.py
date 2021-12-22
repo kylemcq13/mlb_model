@@ -33,7 +33,7 @@ today = str(date.today())
 # save training set to sql database
 print('Saving training data')
 df['create_date'] = date.today()
-df.to_sql('training_df', engine, if_exists='replace', chunksize= 100, method='multi')
+df.to_sql('training_df', engine, if_exists='replace', chunksize= 500, method='multi')
 
 # split the data
 X, y = df[['launch_speed', 'launch_angle']], df['delta_run_exp']

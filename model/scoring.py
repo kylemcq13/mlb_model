@@ -35,7 +35,7 @@ scoring['e_delta_re'] = model.predict(scoring[['launch_speed','launch_angle']])
 # save scoring dataframe to sql server
 print('saving predictions to sql')
 scoring.to_sql('run_exp_scoring_set', engine, if_exists='replace', 
-               chunksize= 100, method='multi')
+               chunksize= 500, method='multi')
 
 print('Done')
 # End Script

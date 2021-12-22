@@ -86,4 +86,4 @@ df3_2021_reco = df3[['batter_name', 'pitcher_name', 'pitcher_team', 'matchup_sco
 # save to sql database
 print('saving to sql')
 df3_2021_reco.to_sql('bp_reco_df', engine, if_exists='replace', 
-               chunksize= 100, method='multi')
+               chunksize= 500, method='multi')

@@ -177,5 +177,5 @@ df_concat = pd.concat(frames)
 df_concat['create_date'] = date.today()
 
 print('saving to sql')
-df_concat.to_sql('clustering', engine, if_exists='replace', 
+df_concat.to_sql('clustering', engine, if_exists='replace', chunksize=1000,
                  method='multi')
