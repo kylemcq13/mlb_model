@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from datetime import date
+from datetime import datetime
 from configparser import ConfigParser
 from sqlalchemy import create_engine
 from sklearn.cluster import KMeans
@@ -172,6 +174,8 @@ frames = [rhp_mf, rhp_cukc, rhp_ff, rhp_slct, rhp_off, lhp_ff, lhp_mf, lhp_slct,
 
 df_concat = pd.concat(frames)
 
+df_concat['create_date'] = date.today()
+
 print('saving to sql')
 df_concat.to_sql('clustering', engine, if_exists='replace', 
-               chunksize= 100, method='multi')
+                 method='multi')
