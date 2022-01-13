@@ -121,37 +121,48 @@ statcast['launch_angle'] = statcast['launch_angle'].fillna(0)
 sc_cluster = statcast
 
 # assign pitcher teams
-def pitcher_team(row):
 
-	if row['inning_topbot'] == 'Top':
-		return row['home_team']
-	
-	elif row['inning_topbot'] == 'Bot':
-		return row['away_team']
+
+def pitcher_team(row):
+    if row['inning_topbot'] == 'Top':
+        return row['home_team']
+    if row['inning_topbot'] == 'Bot':
+        return row['away_team']
+
 
 sc_cluster['pitcher_team'] = sc_cluster.apply(pitcher_team, axis=1)
 
 # Fastballs and Four Seam Fastballs are the same thing
-# Group pitches into similar moving pitches: Fastballs, Moving Fastballs, Slider/Cutter, Curve and Off Speed
+# Group pitches into similar moving pitches: Fastballs, 
+# Moving Fastballs, Slider/Cutter, Curve and Off Speed
 
-sc_cluster['pitch_type'] = sc_cluster['pitch_type'].replace(['FA'],'FF')
+sc_cluster['pitch_type'] = sc_cluster['pitch_type'].replace(['FA'], 'FF')
 
 # categorize the pitches according to pitcher handedness and pitch type
 
 conditions = [
     ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FF')),
-    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FT') | (sc_cluster['p_throws']=='R') & (sc_cluster['pitch_type']=='SI')),
-    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'SL') | (sc_cluster['p_throws']=='R') & (sc_cluster['pitch_type']=='FC')),
-    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'CU') | (sc_cluster['p_throws']=='R') & (sc_cluster['pitch_type']=='KC')),
-    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'CH') | (sc_cluster['p_throws']=='R') & (sc_cluster['pitch_type']=='FS')),
+    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FT') | 
+        (sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'SI')), 
+    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'SL') |
+        (sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FC')),
+    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'CU') | 
+        (sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'KC')),
+    ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'CH') | 
+        (sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FS')),
     ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'FF')),
-    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'FT') | (sc_cluster['p_throws']=='L') & (sc_cluster['pitch_type']=='SI')),
-    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'SL') | (sc_cluster['p_throws']=='L') & (sc_cluster['pitch_type']=='FC')),
-    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'CU') | (sc_cluster['p_throws']=='L') & (sc_cluster['pitch_type']=='KC')),
-    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'CH') | (sc_cluster['p_throws']=='L') & (sc_cluster['pitch_type']=='FS'))
+    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'FT') | 
+        (sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'SI')),
+    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'SL') | 
+        (sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'FC')),
+    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'CU') | 
+        (sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'KC')),
+    ((sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'CH') | 
+        (sc_cluster['p_throws'] == 'L') & (sc_cluster['pitch_type'] == 'FS'))
     ]
 
-values = ['rhp_ff', 'rhp_mf', 'rhp_slct', 'rhp_cukc', 'rhp_off', 'lhp_ff', 'lhp_mf', 'lhp_slct', 'lhp_cukc', 'lhp_off']
+values = ['rhp_ff', 'rhp_mf', 'rhp_slct', 'rhp_cukc', 'rhp_off', 
+          'lhp_ff', 'lhp_mf', 'lhp_slct', 'lhp_cukc', 'lhp_off']
 
 sc_cluster['cat'] = np.select(conditions, values)
 
@@ -162,23 +173,25 @@ scaler = StandardScaler()
 df_clust = sc_cluster.copy()
 
 cols_scale = [
-    'release_speed', 'release_spin_rate', 'pfx_x', 'pfx_z', 'spin_axis', 'plate_x', 'plate_z']
+    'release_speed', 'release_spin_rate', 
+    'pfx_x', 'pfx_z', 'spin_axis', 'plate_x', 'plate_z']
 
 # scale the data
 scaler = StandardScaler().fit(df_clust[cols_scale])
 df_clust[cols_scale] = scaler.transform(df_clust[cols_scale])
 
-rhp_ff = df_clust.loc[df_clust['cat']=='rhp_ff'].dropna()
-rhp_slct = df_clust.loc[df_clust['cat']=='rhp_slct'].dropna()
-rhp_off = df_clust.loc[df_clust['cat']=='rhp_off'].dropna()
-lhp_ff = df_clust.loc[df_clust['cat']=='lhp_ff'].dropna()
-lhp_mf = df_clust.loc[df_clust['cat']=='lhp_mf'].dropna()
-lhp_slct = df_clust.loc[df_clust['cat']=='lhp_slct'].dropna()
-lhp_cukc = df_clust.loc[df_clust['cat']=='lhp_cukc'].dropna()
-lhp_off = df_clust.loc[df_clust['cat']=='lhp_off'].dropna()
+rhp_ff = df_clust.loc[df_clust['cat'] == 'rhp_ff'].dropna()
+rhp_slct = df_clust.loc[df_clust['cat'] == 'rhp_slct'].dropna()
+rhp_off = df_clust.loc[df_clust['cat'] == 'rhp_off'].dropna()
+lhp_ff = df_clust.loc[df_clust['cat'] == 'lhp_ff'].dropna()
+lhp_mf = df_clust.loc[df_clust['cat'] == 'lhp_mf'].dropna()
+lhp_slct = df_clust.loc[df_clust['cat'] == 'lhp_slct'].dropna()
+lhp_cukc = df_clust.loc[df_clust['cat'] == 'lhp_cukc'].dropna()
+lhp_off = df_clust.loc[df_clust['cat'] == 'lhp_off'].dropna()
 
 
-df_list = [rhp_ff, rhp_slct, rhp_off, lhp_ff, lhp_mf, lhp_slct, lhp_cukc, lhp_off]
+df_list = [rhp_ff, rhp_slct, rhp_off, lhp_ff, 
+           lhp_mf, lhp_slct, lhp_cukc, lhp_off]
 
 print('clustering data')
 for df in df_list:
@@ -188,8 +201,8 @@ for df in df_list:
     df['cluster_id'] = df['cluster_id'].astype('str')
     df['cluster_name'] = df['cat'] + '_' + df['cluster_id']
 
-rhp_mf = df_clust.loc[df_clust['cat']=='rhp_mf'].dropna()
-rhp_cukc = df_clust.loc[df_clust['cat']=='rhp_cukc'].dropna()
+rhp_mf = df_clust.loc[df_clust['cat'] == 'rhp_mf'].dropna()
+rhp_cukc = df_clust.loc[df_clust['cat'] == 'rhp_cukc'].dropna()
 
 df_list2 = [rhp_mf, rhp_cukc]
 
@@ -200,7 +213,8 @@ for df in df_list2:
     df['cluster_id'] = df['cluster_id'].astype('str')
     df['cluster_name'] = df['cat'] + '_' + df['cluster_id']
 
-frames = [rhp_mf, rhp_cukc, rhp_ff, rhp_slct, rhp_off, lhp_ff, lhp_mf, lhp_slct, lhp_cukc, lhp_off]
+frames = [rhp_mf, rhp_cukc, rhp_ff, rhp_slct, rhp_off, 
+          lhp_ff, lhp_mf, lhp_slct, lhp_cukc, lhp_off]
 
 df_concat = pd.concat(frames)
 
