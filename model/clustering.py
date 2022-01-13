@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from datetime import date
-from datetime import datetime
 from configparser import ConfigParser
 from sqlalchemy import create_engine
 from sklearn.cluster import KMeans
@@ -23,54 +22,90 @@ engine = create_engine(conn_string)
 # fetch statcast data from postgresql database
 
 sql1 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+            "player_name", "home_team", "away_team", 
+            "inning_topbot", "p_throws", "pitch_type", 
+            "game_date", "events", "pitcher", 
+            "batter", "description", "launch_speed", 
+            "launch_angle", "release_speed", "release_spin_rate",
+            "pfx_x", "pfx_z", "plate_x", 
+            "plate_z", "effective_speed", "pitch_name", 
+            "spin_axis", "delta_run_exp"
         FROM statcast_2016
     '''
 print('Importing 2016 data')
 sc_16 = pd.read_sql_query(sql1, engine)
 
 sql2 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+            "player_name", "home_team", "away_team", 
+            "inning_topbot", "p_throws", "pitch_type", 
+            "game_date", "events", "pitcher", 
+            "batter", "description", "launch_speed", 
+            "launch_angle", "release_speed", "release_spin_rate", 
+            "pfx_x", "pfx_z", "plate_x", 
+            "plate_z", "effective_speed", "pitch_name", 
+            "spin_axis", "delta_run_exp"
         FROM statcast_2017
     '''
 print('Importing 2017 data')
 sc_17 = pd.read_sql_query(sql2, engine)
 
 sql3 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+            "player_name", "home_team", "away_team", 
+            "inning_topbot", "p_throws", "pitch_type", 
+            "game_date", "events", "pitcher", 
+            "batter", "description", "launch_speed", 
+            "launch_angle", "release_speed", "release_spin_rate", 
+            "pfx_x", "pfx_z", "plate_x", 
+            "plate_z", "effective_speed", "pitch_name", 
+            "spin_axis", "delta_run_exp"
         FROM statcast_2018
     '''
 print('Importing 2018 data')
 sc_18 = pd.read_sql_query(sql3, engine)
 
 sql4 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+            "player_name", "home_team", "away_team", 
+            "inning_topbot", "p_throws", "pitch_type", 
+            "game_date", "events", "pitcher", 
+            "batter", "description", "launch_speed", 
+            "launch_angle", "release_speed", "release_spin_rate", 
+            "pfx_x", "pfx_z", "plate_x", 
+            "plate_z", "effective_speed", "pitch_name", 
+            "spin_axis", "delta_run_exp"
         FROM statcast_2019
     '''
 print('Importing 2019 data')
 sc_19 = pd.read_sql_query(sql4, engine)
 
 sql5 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+            "player_name", "home_team", "away_team", 
+            "inning_topbot", "p_throws", "pitch_type", 
+            "game_date", "events", "pitcher", 
+            "batter", "description", "launch_speed", 
+            "launch_angle", "release_speed", "release_spin_rate", 
+            "pfx_x", "pfx_z", "plate_x", 
+            "plate_z", "effective_speed", "pitch_name", 
+            "spin_axis", "delta_run_exp"
         FROM statcast_2020
     '''
 print('Importing 2020 data')
 sc_20 = pd.read_sql_query(sql5, engine)
 
 sql6 = '''
-        SELECT "player_name", "home_team", "away_team", "inning_topbot", "p_throws", "pitch_type", "game_date", "events", "pitcher", 
-         "batter", "description", "launch_speed", "launch_angle", "release_speed", "release_spin_rate", "pfx_x", "pfx_z", 
-         "plate_x", "plate_z", "effective_speed", "pitch_name", "spin_axis", "delta_run_exp"
+        SELECT 
+        "player_name", "home_team", "away_team", 
+        "inning_topbot", "p_throws", "pitch_type", 
+        "game_date", "events", "pitcher", 
+        "batter", "description", "launch_speed", 
+        "launch_angle", "release_speed", "release_spin_rate", 
+        "pfx_x", "pfx_z", "plate_x", 
+        "plate_z", "effective_speed", "pitch_name", 
+        "spin_axis", "delta_run_exp"
         FROM statcast_2021
     '''
 print('Importing 2021 data')
@@ -79,14 +114,9 @@ sc_21 = pd.read_sql_query(sql6, engine)
 statcast = pd.concat([sc_16, sc_17, sc_18, sc_19, sc_20, sc_21])
 
 # fill nulls
-statcast['events']=statcast['events'].fillna('none')
-statcast['launch_speed']=statcast['launch_speed'].fillna(0)
-statcast['launch_angle']=statcast['launch_angle'].fillna(0)
-
-# relevant columns
-# cols = ['player_name', 'home_team', 'away_team', 'inning_topbot', 'p_throws', 'pitch_type', 'game_date', 'events', 'pitcher', 
-#          'batter', 'description', 'launch_speed', 'launch_angle', 'release_speed', 'release_spin_rate', 'release_extension', 'pfx_x', 'pfx_z', 
-#          'plate_x', 'plate_z', 'pitch_name', 'spin_axis', 'delta_run_exp']
+statcast['events'] = statcast['events'].fillna('none')
+statcast['launch_speed'] = statcast['launch_speed'].fillna(0)
+statcast['launch_angle'] = statcast['launch_angle'].fillna(0)
 
 sc_cluster = statcast
 
@@ -96,7 +126,7 @@ def pitcher_team(row):
 	if row['inning_topbot'] == 'Top':
 		return row['home_team']
 	
-	if row['inning_topbot'] == 'Bot':
+	elif row['inning_topbot'] == 'Bot':
 		return row['away_team']
 
 sc_cluster['pitcher_team'] = sc_cluster.apply(pitcher_team, axis=1)
