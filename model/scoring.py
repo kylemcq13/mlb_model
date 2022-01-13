@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import pickle
 from datetime import date
 from configparser import ConfigParser
@@ -13,7 +12,11 @@ conn_string = parser.get('my_db', 'conn_string')
 engine = create_engine(conn_string)
 
 sql1 = '''
-    SELECT "game_date", "player_name", "pitcher", "pitcher_team", "batter", "description", "launch_speed", "launch_angle", "delta_run_exp", "cluster_name"
+    SELECT 
+        "game_date", "player_name", "pitcher", 
+        "pitcher_team", "batter", "description", 
+        "launch_speed", "launch_angle", "delta_run_exp", 
+        "cluster_name"
     FROM clustering
     WHERE "description"='hit_into_play' AND "game_date" > '2020-12-31'
 '''
@@ -30,12 +33,14 @@ model = pickle.load(final_model_pkl)
 print("Loaded saved model :: ", model)
 
 # predict change in run expectancy with launch_speed and angle
-scoring['e_delta_re'] = model.predict(scoring[['launch_speed','launch_angle']])
+scoring['e_delta_re'] = (
+    model.predict(scoring[['launch_speed', 'launch_angle']])
+)
 
 # save scoring dataframe to sql server
 print('saving predictions to sql')
 scoring.to_sql('run_exp_scoring_set', engine, if_exists='replace', 
-               chunksize= 500, method='multi')
+               chunksize=500, method='multi')
 
 print('Done')
 # End Script
