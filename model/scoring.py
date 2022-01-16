@@ -43,4 +43,3 @@ scoring.to_sql('run_exp_scoring_set', engine, if_exists='replace',
                chunksize=500, method='multi')
 
 print('Done')
-# End Script
