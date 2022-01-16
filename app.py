@@ -6,22 +6,24 @@ app = flask.Flask(__name__, template_folder='html_templates')
 
 bp_reco_df = pd.read_csv('data/bp_reco_df.csv', error_bad_lines=False)
 
+
 def bp_reco(batter, pitcher_tm, df):
-    df_reco = df.loc[df['batter_name']==batter]
-    df_reco_team = df_reco.loc[df_reco['pitcher_team']==pitcher_tm]
+    df_reco = df.loc[df['batter_name'] == batter]
+    df_reco_team = df_reco.loc[df_reco['pitcher_team'] == pitcher_tm]
 
     return df_reco_team.sort_values(by=['matchup_score'])
 
-# Set up the main route
-@app.route('/', methods=['GET', 'POST'])
 
+@app.route('/', methods=['GET', 'POST'])
 def main():
     if flask.request.method == 'GET':
         
         batter_nms = bp_reco_df['batter_name'].unique()
         pitcher_tms = bp_reco_df['pitcher_team'].unique()
 
-        return (flask.render_template('index.html', batter_names=batter_nms, pitcher_teams=pitcher_tms))
+        return (flask.render_template('index.html', 
+                                      batter_names=batter_nms, 
+                                      pitcher_teams=pitcher_tms))
     
     if flask.request.method == 'POST':
         # form = InputForm(request.form)
@@ -30,7 +32,7 @@ def main():
         team_input = request.form.get("pt")
         
         result_final = bp_reco(batter_input, team_input,
-                                    bp_reco_df)
+                               bp_reco_df)
         pitcher_name = []
         matchup_score = []
 
@@ -43,6 +45,7 @@ def main():
                                  pitcher=pitcher_name,
                                  score=matchup_score,
                                  search_name=batter_input))  
+
 
 if __name__ == '__main__':
     app.run()

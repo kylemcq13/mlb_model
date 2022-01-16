@@ -1,10 +1,9 @@
 from datetime import date
 from datetime import datetime
 from configparser import ConfigParser
-import pandas as pd
 from pybaseball import pitching_stats
 from sqlalchemy import create_engine
-from datetime import date
+
 
 # establish sql engine connection
 parser = ConfigParser()
@@ -25,4 +24,4 @@ pitching.columns = pitching.columns.str.replace(r'[()]', '', regex=True)
 
 # export to sql database
 pitching.to_sql('pitching', engine, if_exists='append', 
-               chunksize= 100, method='multi')
+                chunksize=100, method='multi')

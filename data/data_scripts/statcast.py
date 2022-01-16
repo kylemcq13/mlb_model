@@ -1,11 +1,9 @@
 from datetime import date
 from datetime import datetime
 from configparser import ConfigParser
-import pandas as pd
 import pybaseball
 from pybaseball import statcast
 from sqlalchemy import create_engine
-from datetime import date
 
 # establish sql engine connection
 parser = ConfigParser()
@@ -25,5 +23,6 @@ if __name__ == '__main__':
     statcast_data = statcast(opening_day, today)
 
     # export to sql database
-    statcast_data.to_sql('statcast_{}'.format(current_year), engine, if_exists='replace', 
-                        chunksize= 100, method='multi')
+    statcast_data.to_sql('statcast_{}'.format(current_year), 
+                         engine, if_exists='replace', 
+                         chunksize=100, method='multi')
