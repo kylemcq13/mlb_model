@@ -53,7 +53,7 @@ The matchup score then ultimately recommends the pitcher from the available opti
 ## How the app works
 
 Let's say the Detroit Tigers wanted bullpen matchup recommendations when facing Yoan Moncada. 
-<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/web_app_yoyoinput.PNG" alt="Yoyo vs Tigers input" width="400" height="300">
+<img src="https://github.com/kylemcq13/mlb_model/blob/main/Sandbox/web_app_yoyoinput.PNG" alt="Yoyo vs Tigers input" width="800" height="300">
 * Fig. 3 - Web App input example
 
 Below would be the recommendations.
