@@ -18,7 +18,7 @@ sql1 = '''
         "launch_speed", "launch_angle", "delta_run_exp", 
         "cluster_name"
     FROM clustering
-    WHERE "description"='hit_into_play' AND "game_date" > '2020-12-31'
+    WHERE "description"='hit_into_play' AND "game_date" > '2021-12-31'
 '''
 print('Importing ball in play dataset')
 scoring = pd.read_sql_query(sql1, engine)

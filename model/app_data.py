@@ -22,6 +22,8 @@ sql1 = '''
 print('Importing non ball in play dataset')
 non_bip = pd.read_sql_query(sql1, engine)
 
+# ideally, both non bip and scored_df should be from same date ranges
+
 sql2 = '''
     SELECT *
     FROM run_exp_scoring_set
@@ -50,6 +52,10 @@ sql5 = '''
 '''
 print("Importing hitting")
 hitting = pd.read_sql_query(sql5, engine)
+
+# below code should fix non bip nonsense
+
+non_bip['e_delta_re'] = non_bip.groupby('description')['delta_run_exp'].transform('mean')
 
 frames = [scored_df, non_bip]
 df_concat = pd.concat(frames)

@@ -111,7 +111,24 @@ sql6 = '''
 print('Importing 2021 data')
 sc_21 = pd.read_sql_query(sql6, engine)
 
-statcast = pd.concat([sc_16, sc_17, sc_18, sc_19, sc_20, sc_21])
+sql7 = '''
+        SELECT 
+        "player_name", "home_team", "away_team", 
+        "inning_topbot", "p_throws", "pitch_type", 
+        "game_date", "events", "pitcher", 
+        "batter", "description", "launch_speed", 
+        "launch_angle", "release_speed", "release_spin_rate", 
+        "pfx_x", "pfx_z", "plate_x", 
+        "plate_z", "effective_speed", "pitch_name", 
+        "spin_axis", "delta_run_exp"
+        FROM statcast_2022
+    '''
+print('Importing 2022 data')
+sc_22 = pd.read_sql_query(sql7, engine)
+
+
+
+statcast = pd.concat([sc_16, sc_17, sc_18, sc_19, sc_20, sc_21, sc_22])
 
 # fill nulls
 statcast['events'] = statcast['events'].fillna('none')
