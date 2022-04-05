@@ -38,4 +38,8 @@ def player_id(df, player_lookup, pitching, hitting):
     df3 = df3.dropna(subset=['g', 'gs'])
 
     return df3
-    
+
+
+def impute_zero(df, cols):
+    df[cols] = df[cols].fillna(0)
+    return df
