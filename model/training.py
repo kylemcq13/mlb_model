@@ -31,7 +31,7 @@ sql1 = '''
     FROM clustering
     WHERE
         "description" = 'hit_into_play' AND 
-        "game_date" < '2021-12-31' AND random()<0.1
+        "game_date" < '2021-12-31' AND random()<0.2
 '''
 df = pd.read_sql_query(sql1, engine)
 
@@ -49,11 +49,13 @@ df = utils.impute_zero(df, ['launch_speed_angle',
 
 df = pd.get_dummies(df, columns=['launch_speed_angle'])
 
+print(df.info())
+print('saving training data to sql')
 df.to_sql('training_df', engine, if_exists='replace',
           chunksize=500, method='multi')
 
 # split the data
-X, y = df[['launch_speed', 'launch_angle', "launch_speed_angle_0.0",
+X, y = df[['launch_speed', 'launch_angle',
            "launch_speed_angle_1.0", "launch_speed_angle_2.0",
            "launch_speed_angle_3.0", "launch_speed_angle_4.0",
            "launch_speed_angle_5.0", "launch_speed_angle_6.0",

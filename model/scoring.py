@@ -45,7 +45,6 @@ print("Loaded saved model :: ", model)
 # predict change in run expectancy with launch_speed and angle
 scoring['e_delta_re'] = (
     model.predict(scoring[["launch_speed", "launch_angle",
-                           "launch_speed_angle_0.0",
                            "launch_speed_angle_1.0",
                            "launch_speed_angle_2.0",
                            "launch_speed_angle_3.0",
