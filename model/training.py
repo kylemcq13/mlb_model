@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import pickle
+import utils
 from datetime import date
 from configparser import ConfigParser
 from sqlalchemy import create_engine
@@ -24,11 +25,13 @@ sql1 = '''
         "game_date", "player_name", "pitcher", 
         "pitcher_team", "batter", "description", 
         "launch_speed", "launch_angle", "delta_run_exp", 
-        "cluster_name"
+        "cluster_name", "launch_speed_angle", 
+        "estimated_woba_using_speedangle",
+        "estimated_ba_using_speedangle"
     FROM clustering
     WHERE
         "description" = 'hit_into_play' AND 
-        "game_date" < '2020-12-31' AND random()<0.1
+        "game_date" < '2021-12-31' AND random()<0.2
 '''
 df = pd.read_sql_query(sql1, engine)
 
@@ -38,11 +41,26 @@ today = str(date.today())
 # save training set to sql database
 print('Saving training data')
 df['create_date'] = date.today()
-df.to_sql('training_df', engine, if_exists='replace', 
+
+df = utils.impute_zero(df, ['launch_speed_angle',
+                            'estimated_woba_using_speedangle',
+                            'estimated_ba_using_speedangle',
+                            'launch_speed', 'launch_angle'])
+
+df = pd.get_dummies(df, columns=['launch_speed_angle'])
+
+print(df.info())
+print('saving training data to sql')
+df.to_sql('training_df', engine, if_exists='replace',
           chunksize=500, method='multi')
 
 # split the data
-X, y = df[['launch_speed', 'launch_angle']], df['delta_run_exp']
+X, y = df[['launch_speed', 'launch_angle',
+           "launch_speed_angle_1.0", "launch_speed_angle_2.0",
+           "launch_speed_angle_3.0", "launch_speed_angle_4.0",
+           "launch_speed_angle_5.0", "launch_speed_angle_6.0",
+           "estimated_woba_using_speedangle",
+           "estimated_ba_using_speedangle"]], df['delta_run_exp']
 
 # create train and test sets
 X_train, X_test, y_train, y_test = train_test_split(

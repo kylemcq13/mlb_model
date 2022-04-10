@@ -30,7 +30,9 @@ sql1 = '''
             "launch_angle", "release_speed", "release_spin_rate",
             "pfx_x", "pfx_z", "plate_x", 
             "plate_z", "effective_speed", "pitch_name", 
-            "spin_axis", "delta_run_exp"
+            "spin_axis", "delta_run_exp", "launch_speed_angle", 
+            "estimated_woba_using_speedangle",
+            "estimated_ba_using_speedangle"
         FROM statcast_2016
     '''
 print('Importing 2016 data')
@@ -45,7 +47,9 @@ sql2 = '''
             "launch_angle", "release_speed", "release_spin_rate", 
             "pfx_x", "pfx_z", "plate_x", 
             "plate_z", "effective_speed", "pitch_name", 
-            "spin_axis", "delta_run_exp"
+            "spin_axis", "delta_run_exp", "launch_speed_angle", 
+            "estimated_woba_using_speedangle",
+            "estimated_ba_using_speedangle"
         FROM statcast_2017
     '''
 print('Importing 2017 data')
@@ -60,7 +64,9 @@ sql3 = '''
             "launch_angle", "release_speed", "release_spin_rate", 
             "pfx_x", "pfx_z", "plate_x", 
             "plate_z", "effective_speed", "pitch_name", 
-            "spin_axis", "delta_run_exp"
+            "spin_axis", "delta_run_exp", "launch_speed_angle", 
+            "estimated_woba_using_speedangle",
+            "estimated_ba_using_speedangle"
         FROM statcast_2018
     '''
 print('Importing 2018 data')
@@ -75,7 +81,9 @@ sql4 = '''
             "launch_angle", "release_speed", "release_spin_rate", 
             "pfx_x", "pfx_z", "plate_x", 
             "plate_z", "effective_speed", "pitch_name", 
-            "spin_axis", "delta_run_exp"
+            "spin_axis", "delta_run_exp", "launch_speed_angle", 
+            "estimated_woba_using_speedangle",
+            "estimated_ba_using_speedangle"
         FROM statcast_2019
     '''
 print('Importing 2019 data')
@@ -90,7 +98,9 @@ sql5 = '''
             "launch_angle", "release_speed", "release_spin_rate", 
             "pfx_x", "pfx_z", "plate_x", 
             "plate_z", "effective_speed", "pitch_name", 
-            "spin_axis", "delta_run_exp"
+            "spin_axis", "delta_run_exp", "launch_speed_angle", 
+            "estimated_woba_using_speedangle",
+            "estimated_ba_using_speedangle"
         FROM statcast_2020
     '''
 print('Importing 2020 data')
@@ -105,13 +115,32 @@ sql6 = '''
         "launch_angle", "release_speed", "release_spin_rate", 
         "pfx_x", "pfx_z", "plate_x", 
         "plate_z", "effective_speed", "pitch_name", 
-        "spin_axis", "delta_run_exp"
+        "spin_axis", "delta_run_exp", "launch_speed_angle", 
+        "estimated_woba_using_speedangle",
+        "estimated_ba_using_speedangle"
         FROM statcast_2021
     '''
 print('Importing 2021 data')
 sc_21 = pd.read_sql_query(sql6, engine)
 
-statcast = pd.concat([sc_16, sc_17, sc_18, sc_19, sc_20, sc_21])
+sql7 = '''
+        SELECT 
+        "player_name", "home_team", "away_team", 
+        "inning_topbot", "p_throws", "pitch_type", 
+        "game_date", "events", "pitcher", 
+        "batter", "description", "launch_speed", 
+        "launch_angle", "release_speed", "release_spin_rate", 
+        "pfx_x", "pfx_z", "plate_x", 
+        "plate_z", "effective_speed", "pitch_name", 
+        "spin_axis", "delta_run_exp", "launch_speed_angle", 
+        "estimated_woba_using_speedangle",
+        "estimated_ba_using_speedangle"
+        FROM statcast_2022
+    '''
+print('Importing 2022 data')
+sc_22 = pd.read_sql_query(sql7, engine)
+
+statcast = pd.concat([sc_16, sc_17, sc_18, sc_19, sc_20, sc_21, sc_22])
 
 # fill nulls
 statcast['events'] = statcast['events'].fillna('none')
@@ -189,8 +218,7 @@ lhp_slct = df_clust.loc[df_clust['cat'] == 'lhp_slct'].dropna()
 lhp_cukc = df_clust.loc[df_clust['cat'] == 'lhp_cukc'].dropna()
 lhp_off = df_clust.loc[df_clust['cat'] == 'lhp_off'].dropna()
 
-
-df_list = [rhp_ff, rhp_slct, rhp_off, lhp_ff, 
+df_list = [rhp_ff, rhp_slct, rhp_off, lhp_ff,
            lhp_mf, lhp_slct, lhp_cukc, lhp_off]
 
 print('clustering data')
