@@ -37,7 +37,7 @@ scoring = utils.impute_zero(scoring, ['launch_speed_angle',
 scoring = pd.get_dummies(scoring, columns=['launch_speed_angle'])
 
 # Loading the saved decision tree model pickle
-final_model_pkl_filename = 'run_exp_model_{}.pkl'.format(today)
+final_model_pkl_filename = 'run_exp_model_.pkl'
 final_model_pkl = open(final_model_pkl_filename, 'rb')
 model = pickle.load(final_model_pkl)
 print("Loaded saved model :: ", model)

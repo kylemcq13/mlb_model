@@ -97,7 +97,7 @@ mae = mean_absolute_error(y_test, y_pred)
 print('mae: ', mae)
 
 # Dump the trained model with pkl
-final_model_pkl_filename = 'run_exp_model_{}.pkl'.format(today)
+final_model_pkl_filename = 'run_exp_model_.pkl'
 
 # Open the file to save as pkl file
 final_model_pkl = open(final_model_pkl_filename, 'wb')
