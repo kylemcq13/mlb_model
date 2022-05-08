@@ -31,7 +31,7 @@ sql1 = '''
     FROM clustering
     WHERE
         "description" = 'hit_into_play' AND 
-        "game_date" < '2021-12-31' AND random()<0.2
+        "game_date" < '2020-12-31' AND random()<0.2
 '''
 df = pd.read_sql_query(sql1, engine)
 

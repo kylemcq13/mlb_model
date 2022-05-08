@@ -21,7 +21,7 @@ sql1 = '''
         "estimated_woba_using_speedangle",
         "estimated_ba_using_speedangle"
     FROM clustering
-    WHERE "description"='hit_into_play' AND "game_date" > '2021-12-31'
+    WHERE "description"='hit_into_play' AND "game_date" > '2020-12-31'
 '''
 print('Importing ball in play dataset')
 scoring = pd.read_sql_query(sql1, engine)
