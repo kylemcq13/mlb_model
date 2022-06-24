@@ -168,7 +168,6 @@ sc_cluster['pitcher_team'] = sc_cluster.apply(pitcher_team, axis=1)
 sc_cluster['pitch_type'] = sc_cluster['pitch_type'].replace(['FA'], 'FF')
 
 # categorize the pitches according to pitcher handedness and pitch type
-
 conditions = [
     ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FF')),
     ((sc_cluster['p_throws'] == 'R') & (sc_cluster['pitch_type'] == 'FT') | 
@@ -209,42 +208,51 @@ cols_scale = [
 scaler = StandardScaler().fit(df_clust[cols_scale])
 df_clust[cols_scale] = scaler.transform(df_clust[cols_scale])
 
-rhp_ff = df_clust.loc[df_clust['cat'] == 'rhp_ff'].dropna()
-rhp_slct = df_clust.loc[df_clust['cat'] == 'rhp_slct'].dropna()
-rhp_off = df_clust.loc[df_clust['cat'] == 'rhp_off'].dropna()
-lhp_ff = df_clust.loc[df_clust['cat'] == 'lhp_ff'].dropna()
-lhp_mf = df_clust.loc[df_clust['cat'] == 'lhp_mf'].dropna()
-lhp_slct = df_clust.loc[df_clust['cat'] == 'lhp_slct'].dropna()
-lhp_cukc = df_clust.loc[df_clust['cat'] == 'lhp_cukc'].dropna()
-lhp_off = df_clust.loc[df_clust['cat'] == 'lhp_off'].dropna()
+cats = {}
 
-df_list = [rhp_ff, rhp_slct, rhp_off, lhp_ff,
-           lhp_mf, lhp_slct, lhp_cukc, lhp_off]
+for val in values:
+    df_name = val 
+    cats[df_name] = df_clust.loc[df_clust['cat'] == val].dropna()
 
-print('clustering data')
-for df in df_list:
-    kmeanModel = KMeans(n_clusters=4)
-    kmeanModel.fit(df[cols_scale])
-    df['cluster_id'] = kmeanModel.labels_
+df = pd.concat(cats.values())
+
+r_keys = ['rhp_ff', 'rhp_mf', 'rhp_slct', 'rhp_cukc', 'rhp_off']
+righties_dict = {x: cats[x] for x in r_keys}
+
+l_keys = ['lhp_ff', 'lhp_mf', 'lhp_slct', 'lhp_cukc', 'lhp_off']
+lefties_dict = {x: cats[x] for x in l_keys}
+
+print('clustering righties data')
+clusters_r = list()
+for df in righties_dict.values():
+
+    model_name = df['cat'].unique() + '_model'
+    print(model_name)
+    model_name = KMeans(n_clusters=3)
+    model_name.fit(df[cols_scale])
+    df['cluster_id'] = model_name.labels_
     df['cluster_id'] = df['cluster_id'].astype('str')
     df['cluster_name'] = df['cat'] + '_' + df['cluster_id']
+    clusters_r.append(model_name)
 
-rhp_mf = df_clust.loc[df_clust['cat'] == 'rhp_mf'].dropna()
-rhp_cukc = df_clust.loc[df_clust['cat'] == 'rhp_cukc'].dropna()
+print('clustering lefties data')
+clusters_l = list()
+for df in lefties_dict.values():
 
-df_list2 = [rhp_mf, rhp_cukc]
-
-for df in df_list2:
-    kmeanModel = KMeans(n_clusters=5)
-    kmeanModel.fit(df[cols_scale])
-    df['cluster_id'] = kmeanModel.labels_
+    df_name = df['cat'].unique() + '_df'
+    model_name = df['cat'].unique() + '_model'
+    print(model_name)
+    model_name = KMeans(n_clusters=3)
+    model_name.fit(df[cols_scale])
+    df['cluster_id'] = model_name.labels_
     df['cluster_id'] = df['cluster_id'].astype('str')
     df['cluster_name'] = df['cat'] + '_' + df['cluster_id']
+    clusters_l.append(model_name)
 
-frames = [rhp_mf, rhp_cukc, rhp_ff, rhp_slct, rhp_off, 
-          lhp_ff, lhp_mf, lhp_slct, lhp_cukc, lhp_off]
+df_righties = pd.concat(righties_dict.values()).reset_index()
+df_lefties = pd.concat(lefties_dict.values()).reset_index()
 
-df_concat = pd.concat(frames)
+df_concat = pd.concat([df_righties, df_lefties])
 
 df_concat['create_date'] = date.today()
 

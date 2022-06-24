@@ -133,3 +133,11 @@ dmypy.json
 
 # pw.py
 pw.py
+
+# sandbox notebooks
+Sandbox/baseball_data_script.ipynb
+Sandbox/bullpen_matchup.ipynb
+Sandbox/clustering_exp.ipynb
+Sandbox/clustering.ipynb
+Sandbox/markov_chains.ipynb
+Sandbox/PyBaseball Sandbox.ipynb
