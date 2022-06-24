@@ -4,7 +4,8 @@ from datetime import date
 from configparser import ConfigParser
 from sqlalchemy import create_engine
 import utils
-
+import mlflow
+import mlflow.sklearn
 
 # establish sql engine connection
 parser = ConfigParser()

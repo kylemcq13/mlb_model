@@ -11,6 +11,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import GridSearchCV
+import mlflow
+import mlflow.sklearn
 
 # consider training model on years' previous data, scoring on current season
 
@@ -67,43 +69,49 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, random_state=13, test_size=0.3
 )
 
-# bring pipelines together for modeling
-rf_reg = Pipeline(steps=[('scaler', StandardScaler()),
-                         ('regressor', RandomForestRegressor())])
+with mlflow.start_run():
+    # bring pipelines together for modeling
+    rf_reg = Pipeline(steps=[('scaler', StandardScaler()),
+                            ('regressor', RandomForestRegressor())])
 
-param_dist = { 
-          'regressor__n_estimators': [100, 200, 500],
-          'regressor__max_depth': [None, 5, 8]
-}
+    param_dist = { 
+            'regressor__n_estimators': [100, 200, 500],
+            'regressor__max_depth': [None, 5, 8]
+    }
 
-# Hyperparameter tuning
-search = GridSearchCV(rf_reg, param_dist, 
-                      n_jobs=-1, scoring='neg_root_mean_squared_error')
-print('Training model...')
-search.fit(X_train, y_train)
-search.best_params_
+    # Hyperparameter tuning
+    search = GridSearchCV(rf_reg, param_dist, 
+                          n_jobs=-1, scoring='neg_root_mean_squared_error')
+    print('Training model...')
+    search.fit(X_train, y_train)
+    search.best_params_
 
-# predict on the test set
-y_pred = search.best_estimator_.predict(X_test)
+    # predict on the test set
+    y_pred = search.best_estimator_.predict(X_test)
 
-# error scores
-rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-print('rmse: ', rmse)
+    # error scores
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    print('rmse: ', rmse)
 
-r2 = r2_score(y_test, y_pred)
-print('r2: ', r2)
+    r2 = r2_score(y_test, y_pred)
+    print('r2: ', r2)
 
-mae = mean_absolute_error(y_test, y_pred)
-print('mae: ', mae)
+    mae = mean_absolute_error(y_test, y_pred)
+    print('mae: ', mae)
 
-# Dump the trained model with pkl
-final_model_pkl_filename = 'run_exp_model_.pkl'
+    mlflow.log_param("best params", search.best_params_)
+    mlflow.log_metric("rmse", rmse)
+    mlflow.log_metric("r2", r2)
+    mlflow.log_metric("mae", mae)
+    
+    # Dump the trained model with pkl
+    final_model_pkl_filename = 'run_exp_model_.pkl'
 
-# Open the file to save as pkl file
-final_model_pkl = open(final_model_pkl_filename, 'wb')
-pickle.dump(search.best_estimator_, final_model_pkl)
+    # Open the file to save as pkl file
+    final_model_pkl = open(final_model_pkl_filename, 'wb')
+    pickle.dump(search.best_estimator_, final_model_pkl)
 
-# Close the pickle instances
-final_model_pkl.close()
+    # Close the pickle instances
+    final_model_pkl.close()
 
-print('Done')
+    print('Done')
